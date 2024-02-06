@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detection Result</title>
+</head>
+<body>
+    <h2>Detection Result</h2>
+    {% if image_url %}
+        <img src="{{ image_url }}" alt="Detected Image">
+    {% else %}
+        <p>No results to display.</p>
+    {% endif %}
+    <a href="/">Try another image</a>
+</body>
+</html>

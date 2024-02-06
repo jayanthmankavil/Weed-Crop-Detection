@@ -1,0 +1,6 @@
+Flask
+opencv-python
+Werkzeug
+darknet-python
+torch
+matplotlib
