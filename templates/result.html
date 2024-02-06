@@ -2,14 +2,61 @@
 <html>
 <head>
     <title>Detection Result</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 400px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Detection Result</h2>
-    {% if image_url %}
-        <img src="{{ image_url }}" alt="Detected Image">
-    {% else %}
-        <p>No results to display.</p>
-    {% endif %}
-    <a href="/">Try another image</a>
+    <div class="container">
+        <h2>Detection Result</h2>
+        {% if image_url %}
+            <img src="{{ image_url }}" alt="Detected Image">
+        {% else %}
+            <p>No results to display.</p>
+        {% endif %}
+        <a href="/">Try another image</a>
+    </div>
 </body>
 </html>

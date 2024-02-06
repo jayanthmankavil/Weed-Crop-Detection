@@ -1,13 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Image</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 400px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Image Upload for Detection</h2>
-    <form action="/detect" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" required>
-        <input type="submit" value="Upload and Detect">
-    </form>
+    <div class="container">
+        <h2>Image Upload for Detection</h2>
+        <form action="/detect" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" id="image" required>
+            <label for="image">Choose an image</label>
+            <div class="image-preview" id="imagePreview">
+                <img src="" alt="Image Preview" class="image-preview__image" style="display:none;">
+                <span class="image-preview__default-text"></span>
+            </div>
+            <br>
+            <input type="submit" value="Upload and Detect">
+        </form>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('image');
+        const previewContainer = document.getElementById('imagePreview');
+        const previewImage = previewContainer.querySelector('.image-preview__image');
+        const previewDefaultText = previewContainer.querySelector('.image-preview__default-text');
+
+        imageInput.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                previewDefaultText.style.display = 'none';
+                previewImage.style.display = 'block';
+
+                reader.addEventListener('load', function() {
+                    previewImage.setAttribute('src', this.result);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                previewDefaultText.style.display = null;
+                previewImage.style.display = null;
+                previewImage.setAttribute('src', '');
+            }
+        });
+    </script>
 </body>
 </html>
